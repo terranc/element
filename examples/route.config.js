@@ -38,6 +38,7 @@ const registerRoute = (navConfig) => {
         description: page.description,
         lang
       },
+      name: 'component',
       component: component.default || component
     };
 
@@ -56,10 +57,12 @@ const generateMiscRoutes = function(lang) {
     component: require(`./pages/${ lang }/guide.vue`),
     children: [{
       path: 'design', // 设计原则
+      name: 'guide',
       meta: { lang },
       component: require(`./pages/${ lang }/design.vue`)
     }, {
       path: 'nav', // 导航
+      name: 'guide',
       meta: { lang },
       component: require(`./pages/${ lang }/nav.vue`)
     }]
@@ -68,6 +71,7 @@ const generateMiscRoutes = function(lang) {
   let resourceRoute = {
     path: `/${ lang }/resource`, // 资源
     meta: { lang },
+    name: 'resource',
     component: require(`./pages/${ lang }/resource.vue`)
   };
 
@@ -91,7 +95,7 @@ route.push({
   component: require('./play/index.vue')
 });
 
-let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language;
+let userLanguage = localStorage.getItem('ELEMENT_LANGUAGE') || window.navigator.language || 'en-US';
 let defaultPath = '/en-US';
 if (userLanguage.indexOf('zh-') !== -1) {
   defaultPath = '/zh-CN';
